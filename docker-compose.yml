@@ -12,7 +12,7 @@ services:
     volumes:
       - guac-db-data:/var/lib/postgresql/data
     networks:
-      - docker-core
+      - core-network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U guacamole_user -d guacamole_db"]
       interval: 10s
@@ -24,7 +24,7 @@ services:
     container_name: guacd
     restart: unless-stopped
     networks:
-      - docker-core
+      - core-network
     healthcheck:
       test: ["CMD", "guacd", "-v"]
       interval: 10s
@@ -50,7 +50,7 @@ services:
     volumes:
       - guac-config:/guac-home
     networks:
-      - docker-core
+      - core-network
     ports:
       - "8080:8080"
     healthcheck:
@@ -64,5 +64,5 @@ volumes:
   guac-config:
 
 networks:
-  docker-core:
+  core-network:
     driver: bridge
