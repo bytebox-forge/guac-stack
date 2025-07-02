@@ -9,6 +9,9 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE}
+      POSTGRESQL_USERNAME: ${POSTGRESQL_USERNAME}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
     volumes:
       - guac-db-data:/var/lib/postgresql/data
     networks:
@@ -46,15 +49,18 @@ services:
       POSTGRES_DATABASE: ${POSTGRES_DATABASE}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE}
+      POSTGRESQL_USERNAME: ${POSTGRESQL_USERNAME}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
       GUACAMOLE_HOME: ${GUACAMOLE_HOME}
     volumes:
       - guac-config:/guac-home
     networks:
       - core-network
     ports:
-      - "8081:8080"
+      - "8580:8080"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/guacamole/"]
+      test: ["CMD", "curl", "-f", "http://localhost:8580/guacamole/"]
       interval: 20s
       timeout: 10s
       retries: 10
